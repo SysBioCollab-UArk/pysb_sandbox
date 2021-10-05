@@ -5,6 +5,13 @@ import matplotlib.pyplot as plt
 
 Model()
 
+# Monomers
+# Parameters
+# Initials
+# Rules
+# Observables
+# simulation commands
+
 Monomer('A', ['b', 'state'], { 'state' : ['U', 'P'] })
 Monomer('B', ['a'])
 
@@ -22,6 +29,7 @@ Rule('A_state_change', A(b=1, state='U') % B(a=1) >> A(b=1, state='P') % B(a=1),
 
 Observable('A_free', A(b=None))
 Observable('A_phos', A(state='P'))
+# Observable('A_bound', A(b=1) % B(a=1))
 Observable('A_bound', A(b=ANY))
 
 tspan = np.linspace(0, 10, 1001)
@@ -31,14 +39,10 @@ result = sim.run()
 obs = result.observables
 
 for o in model.observables:
-    plt.plot(tspan, obs[o.name], 0, label=o.name)
+    plt.plot(tspan, obs[o.name], lw=2, label=o.name)
 plt.xlabel('time')
 plt.ylabel('concentration')
 plt.legend(loc=0)
-
-
-
-
 
 print(model)
 print(model.monomers)
@@ -49,6 +53,3 @@ for ic in model.initial_conditions:
     print(ic)
 
 plt.show()
-
-
-
