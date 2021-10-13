@@ -48,12 +48,14 @@ Initial(B(a=None), B_init)
 Initial(C(X='inactive'),C_init)
 
 
+# reversible reactions rules
 # Declare binding rules  
 Rule('A_binds_B', A(b=None, state='U') + B(a=None) | A(b=1, state='U') % B(a=1), kf_AB, kr_AB)
 Rule('A_state_change', A(b=1, state='U') % B(a=1) >> A(b=1, state='P') % B(a=1), k_A_U_to_P)
 Rule('AP_active_C', A(b=1, state='P') % B(a=1) + C(X = 'inactive') >> A(b=1, state='P') % B(a=1) + C(X = 'active'),k_AP_active_C)
 
 
+#reversible binding of proteins L and R. 
 # observe the complex 
 Observable('A_free', A(b=None))
 Observable('A_phos', A(state='P'))
