@@ -32,8 +32,6 @@ Monomer('B', ['a'])
 Monomer('C', ['X'],{'X' : ['active','inactive']})
 
 
-
-
 # Declare parameters              
 Parameter('kf_AB', 1)
 Parameter('kr_AB', 1)
@@ -44,20 +42,16 @@ Parameter('k_A_U_to_P', 1)
 Parameter('k_AP_active_C',0.1)          # C gets activate (e.g, 0.1 , 0.01 ,0.001 )
 
 
-
-
 # Declare inintial conditions 
 Initial(A(b=None, state='U'), A_init)
 Initial(B(a=None), B_init)
 Initial(C(X='inactive'),C_init)
 
 
-
 # Declare binding rules  
 Rule('A_binds_B', A(b=None, state='U') + B(a=None) | A(b=1, state='U') % B(a=1), kf_AB, kr_AB)
 Rule('A_state_change', A(b=1, state='U') % B(a=1) >> A(b=1, state='P') % B(a=1), k_A_U_to_P)
 Rule('AP_active_C', A(b=1, state='P') % B(a=1) + C(X = 'inactive') >> A(b=1, state='P') % B(a=1) + C(X = 'active'),k_AP_active_C)
-
 
 
 # observe the complex 
@@ -70,7 +64,7 @@ Observable('C_inactive',C(X= 'inactive'))
 
 
 # Declare the simulate time 
-tStart = 0                          # start time 
+tStart = 0                          # Start time 
 tEnd = 10                           # End time 
 tPoints = 1001                      # number of time-points 
 
@@ -81,13 +75,10 @@ tspan = np.linspace(tStart,tEnd, tPoints)
 print ("Simulating.........")
 
 
-
 # Simulate the model 
 sim = ScipyOdeSimulator(model, tspan, verbose=True)
 result = sim.run()
 obs = result.observables
-
-
 
 
 # plot the trajectories 
@@ -109,4 +100,3 @@ for ic in model.initial_conditions:
 
 
 plt.show()
-
