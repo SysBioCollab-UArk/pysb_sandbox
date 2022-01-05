@@ -4,5 +4,6 @@ def myfunction():
 myfunction()
 print('lost')
 print('still')
+print('still')
 
 
